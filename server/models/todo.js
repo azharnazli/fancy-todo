@@ -1,8 +1,14 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-function dateBeforeNow(date) {
-  
+
+function TDate(date) {
+  var ToDate = new Date();
+
+  if (new Date(date).getTime() <= ToDate.getTime()) {
+    return false;
+  }
+  return true;
 }
 
 const TodoSchema = Schema({
@@ -19,17 +25,18 @@ const TodoSchema = Schema({
     type: Date,
     required: [true, `please input your due date`],
     validate: {
-      validator: function(value) {
-        if(value < new Date()) return false
+      validator: function (value) {
+        return TDate(value)
       },
       message: `due date cant use less then now`
     }
   },
   owner: {
-    type: mongoose.Schema.Types.ObjectId,
+    type: Schema.Types.ObjectId,
     ref: 'User'
   }
 })
+
 
 let Todo = mongoose.model('Todo', TodoSchema)
 module.exports = Todo

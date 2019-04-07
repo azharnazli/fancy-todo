@@ -1,14 +1,14 @@
 const Todo = require('../models/todo')
-const { verify } = require('../helpers/jwt')
 
 class TodoController{
 
   static findAllTodo(req, res) {
-    let owner = verify(req.headers.token)
     Todo.find({
-      owner
+      owner:req.authenticated._id
     })
+    .populate('owner',['_id','email'],'User')
       .then((todos) => {
+        // console.log(todos)
         res.status(200).json(todos)
       })
       .catch(err => {
@@ -17,13 +17,12 @@ class TodoController{
   }
 
   static createTodo(req, res) {
-    let owner = verify(req.headers.token)
     Todo.create({
     title: req.body.title,
     body: req.body.body,
     finish: false,
     due_date: req.body.due_date,
-    owner,
+    owner:req.authenticated._id,
     })
     .then((todo) => {
       res.status(201).json(todo)
@@ -31,6 +30,28 @@ class TodoController{
     .catch(err => {
       res.status(500).json(err)
     })
+  }
+
+  static finishTask(req, res) {
+    Todo.findById(req.params.todoId)
+      .then((todo) => {
+        todo.finish = true,
+        todo.save()
+        res.status(200).json(todo)
+      })
+      .catch(err => {
+        res.status(500).json(err)
+      })
+  }
+
+  static finishedTask(req, res) {
+    Todo.findByIdAndDelete(req.params.todoId)
+      .then((todo) => {
+        res.status(200).json(todo)
+      })
+      .catch(err => {
+        res.status(500).json(err)
+      })
   }
 }
 

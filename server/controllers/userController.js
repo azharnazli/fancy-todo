@@ -18,7 +18,7 @@ class UserController {
         res.status(201).json(user)
       })
       .catch(err => {
-        res.status(400).json(err)
+        res.status(500).json(err)
       })
   }
 
@@ -26,16 +26,16 @@ class UserController {
     User.findOne({email : req.body.email})
       .then((foundUser) => {
         if(!foundUser) {
-          res.status(400).json({errors: `wrong email`})
+          res.status(500).json({errors: `wrong email`})
         } else {
           if(!compare(req.body.password, foundUser.password)) {
-            res.status(400).json({errors: `wrong password `})
+            res.status(500).json({errors: `wrong password `})
           } else {
             let token = sign({
               _id : foundUser._id,
               email: req.body.email
             })
-            res.status(200).json(token)
+            res.status(200).json({token,email:req.body.email})
           }
         }
       })
@@ -81,7 +81,7 @@ class UserController {
     })
     .catch(err => {
       console.log(err)
-      res.status(400).json(err)
+      res.status(500).json(err)
     })
   }
 

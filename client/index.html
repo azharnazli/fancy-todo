@@ -26,6 +26,7 @@
     <a href="" id="register" class="nav-link btn-primary mr-2" data-toggle="modal"
       data-target="#modalRegisterForm">Register</a>
     <a href="" id="signIn" class="nav-link btn-primary" data-toggle="modal" data-target="#modalLoginForm">Login</a>
+      <div class="ml-auto mr-4 text-light" id="member" style="font-size: x-large"></div>
   </nav>
 
   <div class="modal fade" id="modalRegisterForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
@@ -112,11 +113,11 @@
 
   <div class="container mt-5" id="todo">
     <div class="row justify-content-between">
-      <div class="col-9 ">
+      <div class="col-7 ">
         <div class="h-100 d-flex flex-column">
           <div class="text-white">
             <div style="min-height:  80vh ">
-              <div class="card text-white bg-primary m-3" style="max-width: 100%;">
+              <div class="card text-white bg-danger m-3">
                 <div class="card-header">
                   <form onsubmit="addTodo()">
                     <label for="title">Title: </label>
@@ -124,12 +125,12 @@
                 </div>
                 <div class="card-body">
                   <label for="">Due Date: </label>
-                  <input type="date" name="" id="due-date">
+                  <input type="datetime-local" name="" id="due-date">
                   <div>
                     <textarea style="min-width:100%;resize:none;min-height: 10vh" id="body" class="card-text"
                       placeholder="new todo..."></textarea>
                   </div>
-                  <button class="btn btn-success float-right">Submit</button>
+                  <button class="btn btn-primary float-right">Submit</button>
                   <a type="button" class="btn btn-danger float-left" onclick="clearVal()">clear</a>
                 </div>
                 </form>
@@ -138,8 +139,8 @@
           </div>
         </div>
       </div>
-      <div class="col-3" id="todo-card">
-        <div class="card text-white bg-dark mb-3 mt-3" id="your-todo" style="max-width: 18rem;">
+      <div class="col-5" id="todo-card">
+        <div class="text-white mb-3 mt-3 text-dark text-justify" id="your-todo" style="max-width: 25rem;">
         </div>
       </div>
     </div>
