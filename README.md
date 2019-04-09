@@ -25,5 +25,6 @@ Access client port:  8080
 /showAll | GET | token | |  Error: Internal server error, Success: Show all todos | Show all todos to user
 /finishTask/:todoId| PATCH | token |  | Error: Internal server error, Success: change finish from false to true | change todo to finished
 /finishedTask/:todoId | DELETE | token | |  Error: Internal server error, Success: delete finish selected todo | delete todo
+/edit/:todoId | PUT | token | title: STRING (required), body: STRING (required), due_date: DATE,(required) | Error: Internal server error, Validation Error, Success: Edit selected todo | Edit selected todo
 
 
