@@ -8,6 +8,7 @@ routes.post('/addTodo', TodoController.createTodo)
 routes.get('/showAll', TodoController.findAllTodo)
 routes.patch('/finishTask/:todoId',authorization, TodoController.finishTask)
 routes.delete('/finishedTask/:todoId',authorization, TodoController.finishedTask)
+routes.put('/edit/:todoId', TodoController.editedTodo)
 
 
 module.exports = routes

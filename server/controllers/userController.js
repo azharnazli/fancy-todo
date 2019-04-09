@@ -34,6 +34,8 @@ class UserController {
             let token = sign({
               _id : foundUser._id,
               email: req.body.email
+            },{
+              
             })
             res.status(200).json({token,email:req.body.email})
           }
